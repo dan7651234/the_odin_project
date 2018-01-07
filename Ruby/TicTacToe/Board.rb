@@ -15,25 +15,49 @@ Player should be able to choose to play again.
 =end
 
 class Board
+  attr_accessor(:board, :lastLocation)
 
   def initialize
     @board = [[1,2,3],[4,5,6],[7,8,9]]
+    @lastLocation = 0
   end
 
   def display
     @board.each {|row| p row}
   end
 
-  def play(location)
-end
-
-myBoard = Board.new
-myBoard.display
-
-
-class Player
-  def initialize(piece)
-    @piece = piece
+  def valid_input(location)
+    if location.class == Fixnum && location >= 0 && location < 10
+      if @board[location/3][location%3].class == Fixnum
+        return true
+      else
+        return false
+      end
+    else
+      return false
+    end
   end
 
-  def play(location)
+  def update(piece, location)
+      @board[location/3][location%3] = piece
+  end
+
+  def win_check
+    @board.each do |x|
+      if x[0] == x[1] && x[0] == x[2]
+        return true
+      end
+    end
+    count = 0
+    track = 0
+    while track < 3
+      if @board[count][track] == @board[count + 1][track] && @board[count][track] == @board[count + 2][track]
+        return true
+      else
+        track += 1
+      end
+    end
+    return false
+  end
+
+end
