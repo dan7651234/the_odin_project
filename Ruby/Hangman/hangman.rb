@@ -71,11 +71,11 @@ class Hangman
     yaml = YAML::dump(self)
     filename = ""
     until filename.length > 0 && ! File.exists?(filename + ".yaml")
-      puts "Please enter a unique name for this saved game file: "
-      filename = gets.chomp
+      #puts "Please enter a unique name for this saved game file: "
+      filename = "previousGame"
     end
-    filename = "/saved_games/" + filename + ".yaml"
-    File.open("filename","w") {|file| file.puts yaml}
+    filename = "./saved_games/" + filename + ".yaml"
+    File.open(filename,"w") {|file| file.puts yaml}
     puts YAML::load(self.to_s)
   end
 
@@ -128,8 +128,11 @@ end
 
 def loadGame
   puts "Choose a game to load: "
-  files = Dir.foreach(dir).select {|x| File.file?("#{dir}/#{x}")}
-  puts files
+  #files = Dir.foreach(dir).select {|x| File.file?("#{dir}/#{x}")}
+  #puts files
+  previousGame = File.read("./saved_games/previousGame.yaml")
+  gameToLoad = YAML::load(previousGame)
+  gameToLoad.playGame
 end
 
 def startGame
@@ -150,7 +153,7 @@ def startGame
     end
     #puts wordChoice
     Hangman.new(wordChoice.downcase.strip)
-  elsif newLoad == "L"
+  elsif newLoad == "l"
     loadGame
   else
     puts "Enter a valid choice N or L only."
