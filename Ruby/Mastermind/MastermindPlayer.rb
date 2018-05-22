@@ -1,13 +1,14 @@
 class Player
   #Type is Codemaker or Codebreaker
   #Controller is Human or Computer
-  attr_accessor(:playType, :playController, :points)
+  attr_accessor(:playType, :playController, :points, :pastGuesses)
 
 
   def initialize (type, controller)
     @playType = type
     @playController = controller
     @points = 0
+    @pastGuesses = []
   end
 
   def switch
@@ -70,4 +71,18 @@ class Player
     end
     return result
   end
+
+  def computerGuess(lastFeedback)
+    result = []
+    possibilities = ["B","W","R","G","P","Y"]
+    i = 0
+    while i < 4
+      result.push(possibilities.sample)
+      i = i + 1
+    end
+    @pastGuesses.push(result)
+    return result
+  end
+
+
 end

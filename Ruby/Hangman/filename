@@ -1,0 +1,25 @@
+--- !ruby/object:Hangman
+wordChoice: exonerator
+wordChoiceArray:
+- e
+- x
+- o
+- n
+- e
+- r
+- a
+- t
+- o
+- r
+remainingGuesses: 7
+result:
+- e
+- "-"
+- "-"
+- n
+- e
+- r
+- "-"
+- t
+- "-"
+- r
