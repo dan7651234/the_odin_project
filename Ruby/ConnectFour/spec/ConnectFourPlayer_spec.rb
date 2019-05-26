@@ -4,12 +4,12 @@ require_relative '../lib/ConnectFourPlayer.rb'
 describe ConnectFourPlayer do
 
   describe '#initialize' do
-    let(:player1) { Player.new }
-    let(:player2) { Player.new }
-
+    let(:player1) { ConnectFourPlayer.new('B') }
+    let(:player2) { ConnectFourPlayer.new('R') }
     context 'when initializing player1' do
       it 'sets the piece for the first player' do
         expect(player1.piece).to eq('B')
+      end
     end
 
     context 'when initializing player2' do
@@ -20,8 +20,9 @@ describe ConnectFourPlayer do
   end
 
   describe '#get_piece' do
-    it 'returns the character used for the player piece'
-    expect(player1.get_piece).to eq("B")
+    let(:player1) { ConnectFourPlayer.new('B') }
+    it 'returns the character used for the player piece' do
+      expect(player1.piece).to eq('B')
+    end
   end
-
 end
